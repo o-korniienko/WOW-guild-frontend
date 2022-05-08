@@ -89,7 +89,7 @@ const BackIcon = () =>{
 const Logo = (props) =>{
      let language = props.language;
      if(language === "UA"){
-          props.setLogoText("Корівки");
+          props.setLogoText("Tauren Milfs");
      }
 
      if(language === "EN"){

@@ -16,15 +16,15 @@ let language = localStorage.getItem("language") != null ? localStorage.getItem("
 const GreetingText = (props) =>{
      let greeting = '';
      if(props.currentLanguage === "EN"){
-        greeting = "       Greeting in guild After Dark";
+        greeting = "       Greeting in guild Tauren Milfs";
         props.setGreetingText(greeting);
-        props.setJoinText("to get more information about us. If you have already succumbed to darkness, just  ");
+        props.setJoinText("to get more information about us. Or, just  ");
         props.setJoinText2("Join ");
         props.setLogInText("log in");
      }
      if(props.currentLanguage === "UA"){
-        props.setGreetingText("Вітаємо в гільдії Після Темряви");
-        props.setJoinText(", щоб отримати більше інформації про нас. \nЯкщо Ви вже піддалися темряві, просто ");
+        props.setGreetingText("Вітаємо в гільдії Tauren Milfs");
+        props.setJoinText(", щоб отримати більше інформації про нас. \nАбо, просто ");
         props.setJoinText2("Приєднуйтесь ");
         props.setLogInText("увійдіть");
      }

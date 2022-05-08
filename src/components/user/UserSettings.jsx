@@ -135,8 +135,8 @@ const EditForm = (props) =>{
      }else{
          form.setFieldsValue({user_name: user.username});
          form.setFieldsValue({email: user.email});
-         form.setFieldsValue({user_role: user.roles});
-         form.setFieldsValue({isActive: user.active.toString()});
+
+
          userRole = user.roles;
          isActive = user.active;
          user2 = user;
@@ -192,18 +192,7 @@ const EditForm = (props) =>{
                   >
                    <Input name= 'email' key="email" style={{ width: 400 }} placeholder={props.emailErrorText}/>
                   </Form.Item>
-                  <Form.Item
-                    name="user_role"
-                    label={props.typeFieldName}
-                  >
-                   <Select
-                     mode="multiple"
-                     style={{ width: 400, color:"#63baf2", border: "1px solid grey"}}
-                     onChange={setUserRole}
-                   >
-                     {UserRoles}
-                   </Select>
-                  </Form.Item>
+
                   <Form.Item
                     name="password"
                     label={props.passFieldName}
@@ -211,18 +200,7 @@ const EditForm = (props) =>{
                   >
                       <Input.Password id="password" name="password" key="password" style={{ width: 400 }} placeholder="input a password"  />
                     </Form.Item>
-                    <Form.Item
-                        name="isActive"
-                        label={props.activeFieldName}
-                      >
-                       <Select
-                            className="user_active_selector"
-                         style={{ width: 400, color:"#63baf2",  border: "1px solid grey"}}
-                         onChange={setUserActivity}
-                       >
-                         {UserActivities}
-                       </Select>
-                      </Form.Item>
+
                    <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
                      <Space>
                          <Button onClick={goBack}>{props.cancelButtonText}</Button>
