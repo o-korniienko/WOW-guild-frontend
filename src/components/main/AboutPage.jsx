@@ -78,6 +78,7 @@ const OnEditing = (className,id, text) =>{
 }
 
 const updateGeneralText = (text, tag) =>{
+    text = text.trim()
     var generalMessage = {
         tag:tag,
         message:text,
@@ -286,21 +287,23 @@ const Content = (props) =>{
     return(
      <Space  id="text_space" align="center" direction="vertical">
 
+          <Title level={3} style={{textAlign: 'center', marginTop:'3%', color:"#248755"}}>GENERAL</Title>
           <Paragraph className='general_section' >{ShowUrls(generalText)} <EditOutlined className="edit_btn" onClick={()=>OnEditing("general_section", "general_text_area", generalText)}/></Paragraph>
-
            <div  style={{display:'none'}} id="general_text_area">
             <TextArea id='general' cols='150' rows={10} value={generalText} onChange={onChangeGeneral}></TextArea>
             <CheckOutlined className="save_btn" onClick={()=>updateGeneralText(generalText, "general")}/> &nbsp;&nbsp;<CloseOutlined className="close_btn" onClick={()=>changeTags("general_section", "general_text_area")}/>
             <br/><br/>
           </div>
 
-          <Paragraph className='about_section' >{ShowUrls(aboutText)} <EditOutlined className="edit_btn" onClick={()=>OnEditing("about_section", "about_text_area", aboutText)}/></Paragraph>
+          <Title level={3} style={{textAlign: 'center', marginTop:'3%', color:"#248755"}}>ABOUT US</Title>
+          <Paragraph className='about_section' >{ShowUrls(aboutText)} <EditOutlined className="edit_btn" onClick={()=>OnEditing("about_section", "about_text_area", aboutText)}/>ABOUT US</Paragraph>
           <div  style={{display:'none'}} id="about_text_area">
            <TextArea id="about" cols='150' rows={10} value={aboutText} onChange={onChangeAbout}></TextArea>
            <CheckOutlined className="save_btn" onClick={() => updateGeneralText(aboutText, "about")}/>&nbsp;&nbsp;<CloseOutlined className="close_btn" onClick={()=>changeTags("about_section", "about_text_area")}/>
            <br/><br/>
           </div>
 
+         <Title level={3} style={{textAlign: 'center', marginTop:'3%', color:"#248755"}}>CONTACTS</Title>
          <Paragraph className='contacts_section' >{ShowUrls(contactsText)} <EditOutlined className="edit_btn" onClick={()=>OnEditing("contacts_section", "contacts_text_area", contactsText)}/></Paragraph>
          <div  style={{display:'none'}} id="contacts_text_area">
           <TextArea id="contacts" cols='150' rows={10} value={contactsText} onChange={onChangeContacts}></TextArea>

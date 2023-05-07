@@ -26,7 +26,7 @@ function App() {
          <Route path='/admin' exact={true} component={Admin}/>
          <Route path='/edit_user/:id' exact={true} component={EditUser}/>
          <Route path='/usr_settings/' exact={true} component={UserSettings}/>
-         <Route path='/members/' exact={true} component={Members}/>
+         <Route path='/members/:tag' exact={true} component={Members}/>
          <Route path='/stars/' exact={true} component={Stars}/>
        </Switch>
      </Router>

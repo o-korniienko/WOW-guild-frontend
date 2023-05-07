@@ -129,32 +129,32 @@ const MembersList = (props) =>{
    }
 
     const onSearch = value => {
-           let str = ""
-           if(value.currentTarget != undefined){
-            str = value.currentTarget.value.trim();
-           }else{
-            str = value;
-           }
+        let str = ""
+        if(value.currentTarget != undefined){
+         str = value.currentTarget.value.trim();
+        }else{
+         str = value;
+        }
 
 
-           if(str ===''){
-               props.setMembers(MEMBERS);
+        if(str ===''){
+            props.setMembers(MEMBERS);
 
-           }else{
-               let foundMembers = [];
-               for(var i = 0; i < MEMBERS.length; i++){
-                   var stringObject = MEMBERS[i].name + " " + MEMBERS[i].classEn + "" + MEMBERS[i].classRu + "" + MEMBERS[i].level + "" + MEMBERS[i].rank + "" + MEMBERS[i].race + "" +
-                   MEMBERS[i].regionEn + "" + MEMBERS[i].regionRu;
-                   if(stringObject.toLowerCase().includes(str.toLowerCase())){
-                       foundMembers.push(MEMBERS[i]);
-                   }
+        }else{
+            let foundMembers = [];
+            for(var i = 0; i < MEMBERS.length; i++){
+                var stringObject = MEMBERS[i].name + " " + MEMBERS[i].classEn + "" + MEMBERS[i].level + "" + MEMBERS[i].rank + "" + MEMBERS[i].race + "" +
+                MEMBERS[i].regionEn;
+                if(stringObject.toLowerCase().includes(str.toLowerCase())){
+                    foundMembers.push(MEMBERS[i]);
+                }
 
-               }
-           setMembers (foundMembers);
-           }
-           setSearchText(str)
-           SEARCH = str
-       }
+            }
+        setMembers (foundMembers);
+        }
+        setSearchText(str)
+        SEARCH = str
+    }
 
     const ListData =() =>{
         if(members != undefined && members != null && members.length > 0){
@@ -218,21 +218,15 @@ const MembersList = (props) =>{
                              break
 
                          }
-                         let regionRu = member.regionRu;
                          let iconUrl = member.iconURL
 
                          if(iconUrl === null || iconUrl === undefined){
                             iconUrl = "https://worldofwarcraft.com/ru-ru/character/eu/borean-tundra/%D0%BB%D1%8C%D0%BE%D1%88%D0%BA%D0%B0";
                          }
-                         if(regionRu === "черный-шрам"){
-                             regionRu = "черныи-шрам"
-                         }
-                         if(regionRu === "борейская-тундра"){
-                             regionRu = "бореиская-тундра"
-                         }
+
                          let title = member.name + ", " + className + " - " + member.level + lvlName;
                          let urlWOW = "https://worldofwarcraft.com/ru-ru/character/eu/" + member.regionEn +"/" + member.name;
-                         let urlWOWLogs = "https://ru.warcraftlogs.com/character/eu/" + regionRu + "/" + member.name;
+                         let urlWOWLogs = "https://ru.warcraftlogs.com/character/eu/" + member.regionEn + "/" + member.name;
                          let urlRaiderIo = "https://raider.io/characters/eu/" + member.regionEn +"/" + member.name;
 
                          return(<>
@@ -244,7 +238,7 @@ const MembersList = (props) =>{
                               actions={[<SyncOutlined onClick = {()=>updateCharacterData(member.id)} style={{color:'#1a854f', fontSize:'200%'}}/>]}
                             >
                             <Space  >
-                             <Link  className="logo" onClick={()=>{goTo(urlWOW)}} ><img style={{maxWidth:'100%', height:'auto'}} src={wowLogo} /></Link>
+                              <Link className="logo" onClick={()=>{goTo(urlWOW)}} ><img style={{maxWidth:'100%', height:'auto'}} src={wowLogo} /></Link>
                               <Link className="logo" onClick={()=>{goTo(urlWOWLogs)}} ><img style={{maxWidth:'100%', height:'auto'}} src={wowLogsLogo} /></Link>
                               <Link className="logo" onClick={()=>{goTo(urlRaiderIo)}} ><img style={{maxWidth:'100%', height:'auto'}} src={RaiderIo} /></Link>
                             </Space>

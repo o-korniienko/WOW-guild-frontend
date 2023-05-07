@@ -1,7 +1,9 @@
 .about_section, .general_section, .contacts_section{
+    text-align:left;
     font-family:"Trebuchet MS";
     font-size:18px;
     color: #032313;
+    white-space: pre-line;
 
 }
 

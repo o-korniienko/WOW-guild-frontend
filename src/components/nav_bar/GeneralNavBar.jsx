@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import { UserOutlined, ArrowLeftOutlined} from '@ant-design/icons';
-import logo from './../logo/logo2.jpg';
+import logo from './../logo/TM.png';
 
 
 const cookies = new Cookies();
@@ -96,7 +96,7 @@ const Logo = (props) =>{
          props.setLogoText("Tauren Milfs");
      }
 
-     return (<Link className="logo" to="/" >{props.logoText}</Link>
+     return (<Link className="logo" to="/" ><img alt = "here must be a logo" style={{maxWidth:'20%', height:'auto'}} src={logo} />{props.logoText}</Link>
      )
 }
 
@@ -199,9 +199,9 @@ const Menu = (props) =>{
         break
         case "/crafts" : colorCrafts = "#c8e6c9"
         break
-        case "/members" : colorMembers = "#c8e6c9"
+        case "/members/list" : colorMembers = "#c8e6c9"
         break
-        case "/stars" : colorMembers = "#c8e6c9"
+        case "/members/stars" : colorMembers = "#c8e6c9"
         break
 
     }
@@ -241,7 +241,7 @@ const Menu = (props) =>{
         return(
             <Descriptions  column={4} style={{width:'45%', position:'relative', left:'35%'}}>
                 <Descriptions.Item>
-                   <Link className="header_menu" style = {{color:colorMembers}}  to="/members">{props.membersText}</Link>
+                   <Link className="header_menu" style = {{color:colorMembers}}  to="/members/list">{props.membersText}</Link>
                </Descriptions.Item>
                 <Descriptions.Item>
                    <Link className="header_menu" style = {{color:colorAdd}}  to="/addons">{props.addonsText}</Link>
@@ -262,7 +262,7 @@ const Menu = (props) =>{
          return(
             <Descriptions  column={5} style={{ width:'45%', position:'relative', left:'30%'}}>
                 <Descriptions.Item>
-                   <Link className="header_menu" style = {{color:colorMembers}}  to="/members">{props.membersText}</Link>
+                   <Link className="header_menu" style = {{color:colorMembers}}  to="/members/list">{props.membersText}</Link>
                </Descriptions.Item>
                <Descriptions.Item>
                    <Link className="header_menu" style = {{color:colorAdd}} to="/addons">{props.addonsText}</Link>
@@ -307,7 +307,7 @@ function NavBar(props){
           height:3%;
           minWidth:100%;
           border: 1px solid rgb(0, 0, 0);
-          background-color:rgb(21, 21, 21);
+          background-color:rgb(0, 0, 0);
         `
 
      const setData =(data)=>{

@@ -4,7 +4,7 @@ import React, { useState, useEffect} from 'react';
 import styled from 'styled-components'
 import  './NavBar.css';
 import { Link } from 'react-router-dom';
-import logo from './../logo/logo2.jpg';
+import logo from './../logo/TM.png';
 
 
 const { Option } = Select;
@@ -85,7 +85,7 @@ const Logo = (props) =>{
      if(language === "EN"){
          props.setLogoText("Tauren Milfs");
      }
-     return (<Link className="logo" to="/" >{props.logoText}</Link>
+     return (<Link className="logo" to="/" ><img alt = "here must be a logo" style={{maxWidth:'20%', height:'auto'}} src={logo} />{props.logoText}</Link>
      )
 }
 
@@ -119,7 +119,7 @@ const NavBar = (props)=>{
       maxHeight:20%;
       width:100%;
       border: 1px solid rgb(0, 0, 0);
-      background-color:rgb(21, 21, 21);
+      background-color:rgb(0, 0, 0);
     `
 
           return(<StyledPageHeader

@@ -592,8 +592,8 @@ function MainContent (props){
         }else{
             let foundMembers = [];
             for(var i = 0; i < MEMBERS.length; i++){
-                var stringObject = MEMBERS[i].name + " " + MEMBERS[i].classEn + "" + MEMBERS[i].classRu + "" + MEMBERS[i].level + "" + MEMBERS[i].rank + "" + MEMBERS[i].race + "" +
-                MEMBERS[i].regionEn + "" + MEMBERS[i].regionRu;
+                var stringObject = MEMBERS[i].name + " " + MEMBERS[i].classEn + "" + MEMBERS[i].level + "" + MEMBERS[i].rank + "" + MEMBERS[i].race + "" +
+                MEMBERS[i].regionEn;
                 if(stringObject.toLowerCase().includes(str.toLowerCase())){
                     foundMembers.push(MEMBERS[i]);
                 }

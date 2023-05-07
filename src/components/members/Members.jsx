@@ -48,6 +48,10 @@ const MenuComponent = (props) =>{
         const toggleCollapsed = () => {
             collapsed ? setCollapsed(false) : setCollapsed(true);
         };
+        const [hoverList, setHoverList] = useState(false);
+        const [hoverUpdateAll, setHoverUpdateAll] = useState(false);
+        const [hoverRateList, setHoverRateList] = useState(false);
+        const [hoverUpdateLogAll, setHoverUpdateLogAll] = useState(false);
 
 
         let language = props.language;
@@ -74,6 +78,44 @@ const MenuComponent = (props) =>{
          }
 
 
+        const handleMouseEnter = (index) => {
+          switch (index) {
+            case 1:
+                setHoverList(true);;
+                break;
+            case 2:
+                setHoverUpdateAll(true);
+                break;
+            case 3:
+                setHoverRateList(true);
+                break;
+            case 4:
+                setHoverUpdateLogAll(true);
+                break;
+            default:
+
+          }
+        };
+
+        const handleMouseLeave = (index) => {
+          switch (index) {
+            case 1:
+                setHoverList(false);;
+                break;
+            case 2:
+                setHoverUpdateAll(false);
+                break;
+            case 3:
+                setHoverRateList(false);
+                break;
+            case 4:
+                setHoverUpdateLogAll(false);
+                break;
+            default:
+          }
+        };
+
+
         const updateMembersFromBlizzard = () =>{
             props.setLoading(true);
 
@@ -97,8 +139,8 @@ const MenuComponent = (props) =>{
         }
 
         const setContent = (value) =>{
-            console.log(value);
-            props.setContentType(value)
+            window.location.href = "/members/" + value
+           // props.setContentType(value)
         }
 
         const updateRankingData = ()=>{
@@ -154,13 +196,31 @@ const MenuComponent = (props) =>{
 
 
             <SubMenu title = {memberListText} icon={<TeamOutlined style={{color:'#1a854f', fontSize:'150%'}}/>}>
-                <Menu.Item key="0" id = "admin" icon={<UnorderedListOutlined style={{color:'#1a854f', fontSize:'150%'}}/>}>
-                 <Link style={{color:'#1a854f', fontSize:'100%'}} onClick = {()=>setContent("list")}>
+                <Menu.Item key="0" id = "admin" icon={<UnorderedListOutlined style={{
+                    color: '#1a854f',
+                    fontSize:'150%',
+
+                }}/>}>
+                 <Link style={{
+                        color: hoverList ? '#1e7ce4' : '#1a854f',
+                        fontSize:'100%'
+                    }}
+                    onClick = {()=>setContent("list")}
+                    onMouseEnter={()=>handleMouseEnter(1)}
+                    onMouseLeave={()=>handleMouseLeave(1)}
+                 >
                    {listText}
                  </Link>
                  </Menu.Item>
                  <Menu.Item key="1" id = "admin" icon={<SyncOutlined style={{color:'#1a854f', fontSize:'150%'}}/>}>
-                 <Link style={{color:'#1a854f', fontSize:'100%'}} onClick = {updateMembersFromBlizzard}>
+                 <Link style={{
+                        color: hoverUpdateAll ? '#1e7ce4' : '#1a854f',
+                        fontSize:'100%'
+                    }}
+                    onClick = {updateMembersFromBlizzard}
+                    onMouseEnter={()=>handleMouseEnter(2)}
+                    onMouseLeave={()=>handleMouseLeave(2)}
+                 >
                    {updateText}
                  </Link>
                  </Menu.Item>
@@ -168,12 +228,26 @@ const MenuComponent = (props) =>{
 
                  <SubMenu title={starsText}  icon={<BarChartOutlined style={{color:'#1a854f', fontSize:'150%'}}/>}>
                  <Menu.Item key="2">
-                    <Link style={{color:'#1a854f', fontSize:'100%'}} onClick = {()=>setContent("stars")}>
+                    <Link style={{
+                            color: hoverRateList ? '#1e7ce4' : '#1a854f',
+                            fontSize:'100%'
+                        }}
+                        onClick = {()=>setContent("stars")}
+                        onMouseEnter={()=>handleMouseEnter(3)}
+                        onMouseLeave={()=>handleMouseLeave(3)}
+                    >
                     {starsText}
                     </Link>
                  </Menu.Item>
                  <Menu.Item key="3">
-                     <Link style={{color:'#1a854f', fontSize:'100%'}} onClick = {updateRankingData}>
+                     <Link style={{
+                            color: hoverUpdateLogAll ? '#1e7ce4' : '#1a854f',
+                            fontSize:'100%'
+                        }}
+                        onClick = {updateRankingData}
+                        onMouseEnter={()=>handleMouseEnter(4)}
+                        onMouseLeave={()=>handleMouseLeave(4)}
+                     >
                      {updateRankText}
                      </Link>
                   </Menu.Item>
@@ -197,7 +271,7 @@ const showError = (response,setLoading) =>{
     message.error("Oooops, something goes wrong. \n error: " + response.status + "\n error description: " + response.statusText)
 }
 
-function Members (){
+function Members (props){
     languageLocal = localStorage.getItem("language") != null ? localStorage.getItem("language") : "EN";
     const [collapsed, setCollapsed] = useState(false);
     const [currentLanguage, setLanguage] = useState(languageLocal);
@@ -205,7 +279,7 @@ function Members (){
     const [loading, setLoading] = useState(false);
     const [members, setMembers] = useState(null)
     const [user, setUser] = useState(null);
-    const [contentType, setContentType] = useState("list");
+    const [contentType, setContentType] = useState(props.match.params.tag);
     const [bosses, setBosses] = useState([])
     let patchName = window.location.pathname;
 
@@ -287,8 +361,8 @@ function Members (){
         }else{
             let foundMembers = [];
             for(var i = 0; i < MEMBERS.length; i++){
-                var stringObject = MEMBERS[i].name + " " + MEMBERS[i].classEn + "" + MEMBERS[i].classRu + "" + MEMBERS[i].level + "" + MEMBERS[i].rank + "" + MEMBERS[i].race + "" +
-                MEMBERS[i].regionEn + "" + MEMBERS[i].regionRu;
+                var stringObject = MEMBERS[i].name + " " + MEMBERS[i].classEn + "" +  MEMBERS[i].level + "" + MEMBERS[i].rank + "" + MEMBERS[i].race + "" +
+                MEMBERS[i].regionEn;
                 if(stringObject.toLowerCase().includes(str.toLowerCase())){
                     foundMembers.push(MEMBERS[i]);
                 }
@@ -328,7 +402,7 @@ function Members (){
 
 
 
-export default function MembersPage(){
-return <Members/>
+export default function MembersPage(props){
+return <Members {... props}/>
 
 }

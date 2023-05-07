@@ -140,8 +140,7 @@ const UserList = (props) =>{
               <Search style={{width:'240px'}} placeholder={props.searchPlaceHolder} onChange={onSearch} enterButton />
               <Table  dataSource={users}
                   sticky
-
-
+                  style={{marginTop:"3%"}}
                   pagination= { {pageSizeOptions: ['10', '20', '40', '50' ,'70' ,'100'], showSizeChanger: true}}
               >
 
