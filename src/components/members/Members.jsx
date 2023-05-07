@@ -43,6 +43,10 @@ function isAdmin(user){
     return false;
 }
 
+
+
+
+
 const MenuComponent = (props) =>{
         const [collapsed, setCollapsed] = useState(true);
         const toggleCollapsed = () => {
@@ -300,11 +304,39 @@ function Members (props){
     const ContentDiv = (props) =>{
 
         if(contentType === "list"){
-            return (<MembersList setMembers = {setMembers} setSearchValue = {setSearchValue} searchValue = {searchValue}  setLoading = {setLoading}  members = {members} language = {currentLanguage}/>)
+            return (<MembersList updateCharacterDataInTable = {updateCharacterDataInTable} setMembers = {setMembers} setSearchValue = {setSearchValue} searchValue = {searchValue}  setLoading = {setLoading}  members = {members} allMembers = {MEMBERS} language = {currentLanguage}/>)
         }
         if(contentType === "stars"){
             return (<Stars bosses = {bosses}/>)
         }
+    }
+
+    const updateCharacterDataInTable = (data, search) =>{
+         setLoading(false);
+         let newArray = Object.entries(data)
+         let map = new Map(newArray);
+         if(map.keys().next().value === 'Deleted' || map.keys().next().value === 'Saved' || map.keys().next().value ===  'Successful'){
+             message.success(map.keys().next().value);
+             var updatedCharacter = map.values().next().value
+
+              for(var i = 0; i < MEMBERS.length; i++){
+                 if(MEMBERS[i].id === updatedCharacter.id){
+                     MEMBERS[i] = updatedCharacter
+                 }
+             }
+         }else{
+             message.error(map.keys().next().value);
+         }
+         let mainDiv = document.getElementById('mainDiv');
+         if(mainDiv != null){
+            mainDiv.className = 'main_div_enabled';
+         }
+         if(search.trim() === ""){
+            setMembers([])
+            setMembers(MEMBERS)
+         }else{
+            onSearch(search)
+         }
     }
 
     useEffect(() => {
@@ -351,26 +383,32 @@ function Members (props){
     }
 
 
-    /* const onSearch = value => {
-        let str = value.currentTarget.value.trim();
-        setSearchValue(str);
+     const onSearch = (value) => {
+         let str = ""
+         if(value.currentTarget != undefined){
+            str = value.currentTarget.value.trim();
+         }else{
+            str = value.trim();
+         }
 
-        if(str ===''){
-            setMembers(MEMBERS);
 
-        }else{
-            let foundMembers = [];
-            for(var i = 0; i < MEMBERS.length; i++){
-                var stringObject = MEMBERS[i].name + " " + MEMBERS[i].classEn + "" +  MEMBERS[i].level + "" + MEMBERS[i].rank + "" + MEMBERS[i].race + "" +
-                MEMBERS[i].regionEn;
-                if(stringObject.toLowerCase().includes(str.toLowerCase())){
-                    foundMembers.push(MEMBERS[i]);
-                }
+         if(str ===''){
+             setMembers(MEMBERS);
 
-            }
-        setMembers (foundMembers);
-        }
-    } */
+         }else{
+             let foundMembers = [];
+             for(var i = 0; i < MEMBERS.length; i++){
+                 var stringObject = MEMBERS[i].name + " " + MEMBERS[i].classEn + "" + MEMBERS[i].level + "" + MEMBERS[i].rank + "" + MEMBERS[i].race + "" +
+                 MEMBERS[i].regionEn;
+                 if(stringObject.toLowerCase().includes(str.toLowerCase())){
+                     foundMembers.push(MEMBERS[i]);
+                 }
+
+             }
+         setMembers(foundMembers);
+         }
+         //SEARCH = str
+     }
 
     const handleChange = (value) => {
         console.log(value);

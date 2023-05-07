@@ -34,7 +34,7 @@ const MembersList = (props) =>{
     const [searchText, setSearchText] = useState(SEARCH)
 
 
-    var MEMBERS = props.members;
+    var MEMBERS = props.allMembers;
 
     let language = props.language;
     const goTo = (url) => {
@@ -90,7 +90,7 @@ const MembersList = (props) =>{
    }
 
    const updateCharacterData = (id) =>{
-        onSearch(SEARCH)
+        //onSearch(SEARCH)
         props.setLoading(true);
 
         let mainDiv = document.getElementById('mainDiv');
@@ -107,17 +107,23 @@ const MembersList = (props) =>{
           credentials: 'include'
         })
         .then(response=> response.status !== 200 ? showError(response, props.setLoading) : response.url.includes("login_in") ? window.location.href = "/login_in" : response.json())
-        .then(data=>updateCharacterDataInTable(data));
+        .then(data=>props.updateCharacterDataInTable(data,SEARCH));
 
    }
 
-   const updateCharacterDataInTable = (data) =>{
-
+/*    const updateCharacterDataInTable = (data) =>{
         props.setLoading(false);
         let newArray = Object.entries(data)
         let map = new Map(newArray);
         if(map.keys().next().value === 'Deleted' || map.keys().next().value === 'Saved' || map.keys().next().value ===  'Successful'){
             message.success(map.keys().next().value);
+            var updatedCharacter = map.values().next().value
+
+             for(var i = 0; i < MEMBERS.length; i++){
+                if(MEMBERS[i].id === updatedCharacter.id){
+                    MEMBERS[i] = updatedCharacter
+                }
+            }
         }else{
             message.error(map.keys().next().value);
         }
@@ -125,8 +131,8 @@ const MembersList = (props) =>{
         if(mainDiv != null){
            mainDiv.className = 'main_div_enabled';
         }
-
-   }
+        return MEMBERS
+   } */
 
     const onSearch = value => {
         let str = ""
@@ -138,7 +144,7 @@ const MembersList = (props) =>{
 
 
         if(str ===''){
-            props.setMembers(MEMBERS);
+            setMembers(MEMBERS);
 
         }else{
             let foundMembers = [];
@@ -258,7 +264,7 @@ const MembersList = (props) =>{
 
     return (
         <>
-         <Input value={searchText} style={{position:" relative", top:'24px', left:"2%", width:'340px'}} placeholder="input search text" onChange={onSearch} enterButton />
+         <Input id = "search_input" value={searchText} style={{position:" relative", top:'24px', left:"2%", width:'340px'}} placeholder="input search text" onChange={onSearch} enterButton />
          <ListData/>
         </>
     )
