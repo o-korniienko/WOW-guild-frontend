@@ -1,5 +1,5 @@
 import AppNavbar from './../nav_bar/GeneralNavBar.jsx';
-import { Table, Tag, Space, Popconfirm, Menu, Button, message, Upload, Layout, Input, Row, Col } from 'antd';
+import { Table, Tag, Space, Popconfirm, Menu, Button, message, Upload, Layout, Input, Row, Col} from 'antd';
 import 'antd/dist/antd.css';
 import {
   PlusCircleOutlined,
@@ -10,10 +10,13 @@ import React, { useState, useEffect } from 'react';
 import Cookies from 'universal-cookie';
 import { Link } from 'react-router-dom';
 
+
+const cookies = new Cookies();
+const XSRFToken  = cookies.get('XSRF-TOKEN')
+
 const { Search } = Input;
 const { Sider, Content } = Layout;
 const { Column, ColumnGroup } = Table;
-const cookies = new Cookies();
 const {pagination, Return, handleStandardTableChange} = Table;
 const userRolesFilter =[]
 const userActiveFilter =[]
@@ -40,6 +43,25 @@ function DeleteButton(props){
        </Space>
     );
 
+}
+
+const showError = (response) =>{
+    message.error("Oooops, something goes wrong. \n error: " + response.status + "\n error description: " + response.statusText)
+}
+
+const testFunction = () =>{
+    console.log("test function")
+    fetch('/make_test/', {
+              method: 'POST',
+              headers: {
+                'X-XSRF-TOKEN': XSRFToken,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              credentials: 'include'
+            })
+            .then(response=> response.status !== 200 ? showError(response) : response.url.includes("login_in") ? window.location.href = "/login_in" : response.json())
+            .then(data=>console.log(data));
 }
 
 const UserList = (props) =>{
@@ -210,6 +232,7 @@ const UserList = (props) =>{
                   )}
                 />
                </Table>
+               <Button onClick={testFunction} >Test</Button>
               </Content>
 
            </Layout>

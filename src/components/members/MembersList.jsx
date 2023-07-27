@@ -52,6 +52,7 @@ const MembersList = (props) =>{
     let monkName = "Monk";
     let druidName = "Druid";
     let demonName = "DemonHunter";
+    let evokerName = "Evoker";
     let lvlName = "lvl";
     if(language === "EN"){
         hunterName = "Hunter";
@@ -67,7 +68,7 @@ const MembersList = (props) =>{
         monkName = "Monk";
         druidName = "Druid";
         demonName = "DemonHunter";
-
+        evokerName = "Evoker";
     }
     if(language === "UA"){
         hunterName = "Мисливець";
@@ -83,6 +84,7 @@ const MembersList = (props) =>{
         druidName = "Друїд"
         demonName = "Мисливець на Демонів"
         warName = "Воїн"
+        evokerName = "Евокер"
     }
 
    function showTotal(total) {
@@ -90,10 +92,12 @@ const MembersList = (props) =>{
    }
 
    const updateCharacterData = (id) =>{
-        //onSearch(SEARCH)
+        if(SEARCH.trim() !== ""){
+            props.onSearch(SEARCH)
+        }
         props.setLoading(true);
 
-        let mainDiv = document.getElementById('mainDiv');
+         let mainDiv = document.getElementById('mainDiv');
         if(mainDiv != null){
            mainDiv.className = 'main_div_disabled';
         }
@@ -108,6 +112,14 @@ const MembersList = (props) =>{
         })
         .then(response=> response.status !== 200 ? showError(response, props.setLoading) : response.url.includes("login_in") ? window.location.href = "/login_in" : response.json())
         .then(data=>props.updateCharacterDataInTable(data,SEARCH));
+
+        /* setTimeout(function(){
+            props.setLoading(false)
+            console.log("Hello World");
+        }, 2000); */
+
+
+
 
    }
 
@@ -222,17 +234,20 @@ const MembersList = (props) =>{
                              case "DemonHunter" : {color = "#A330C9";
                                 className = demonName;}
                              break
+                             case "Evoker" : {color = "#479099";
+                                className = evokerName;}
+                             break
 
                          }
                          let iconUrl = member.iconURL
 
                          if(iconUrl === null || iconUrl === undefined){
-                            iconUrl = "https://worldofwarcraft.com/ru-ru/character/eu/borean-tundra/%D0%BB%D1%8C%D0%BE%D1%88%D0%BA%D0%B0";
+                            iconUrl = "https://worldofwarcraft.com/character/eu/tarren-mill";
                          }
 
                          let title = member.name + ", " + className + " - " + member.level + lvlName;
-                         let urlWOW = "https://worldofwarcraft.com/ru-ru/character/eu/" + member.regionEn +"/" + member.name;
-                         let urlWOWLogs = "https://ru.warcraftlogs.com/character/eu/" + member.regionEn + "/" + member.name;
+                         let urlWOW = "https://worldofwarcraft.com/character/eu/" + member.regionEn +"/" + member.name;
+                         let urlWOWLogs = "https://warcraftlogs.com/character/eu/" + member.regionEn + "/" + member.name;
                          let urlRaiderIo = "https://raider.io/characters/eu/" + member.regionEn +"/" + member.name;
 
                          return(<>

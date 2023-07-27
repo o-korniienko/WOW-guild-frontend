@@ -345,7 +345,7 @@ function NavBar(props){
                        ]}
              >
 
-                <Menu
+             <Menu
                 language = {language}
                 aboutText = {aboutText}
                 setAboutText = {setAboutText}

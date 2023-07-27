@@ -174,6 +174,9 @@ const MembersList = (props) =>{
                         case "DemonHunter" : color = "#A330C9";
 
                         break
+                        case "Evoker" : color = "#479099";
+
+                        break
 
                     }
                     return (
@@ -186,13 +189,13 @@ const MembersList = (props) =>{
              />
 
              <Column  width = "23%" align="center"  title={maxDPSTitle} dataIndex="max" key="max"
-              sorter= {(a, b) => a.max.toString().localeCompare(b.max.toString())}
+              sorter= {(a, b) => a.max - b.max}
              />
              <Column  width = "23%" align="center"  title={averageDPSTitle} dataIndex="average" key="average"
-             sorter= {(a, b) => a.average.toString().localeCompare(b.average.toString())}
+             sorter= {(a, b) => a.average - b.average}
              />
              <Column  width = "23%" align="center" title={totalKillsTitle} dataIndex="totalKills" key="totalKills"
-              sorter= {(a, b) => a.totalKills.toString().localeCompare(b.totalKills.toString())}
+              sorter= {(a, b) => a.totalKills - b.totalKills}
              />
 
 
@@ -289,13 +292,13 @@ const MembersList = (props) =>{
              />
 
              <Column  width = "23%" align="center"  title={maxHPSTitle} dataIndex="max" key="max"
-              sorter= {(a, b) => a.max.toString().localeCompare(b.max.toString())}
+              sorter= {(a, b) => a.max - b.max}
              />
              <Column  width = "23%" align="center"  title={averageHPSTitle} dataIndex="average" key="average"
-             sorter= {(a, b) => a.average.toString().localeCompare(b.average.toString())}
+             sorter= {(a, b) => a.average - b.average}
              />
              <Column  width = "23%" align="center" title={totalKillsTitle} dataIndex="totalKills" key="totalKills"
-              sorter= {(a, b) => a.totalKills.toString().localeCompare(b.totalKills.toString())}
+              sorter= {(a, b) => a.totalKills - b.totalKills}
              />
 
 

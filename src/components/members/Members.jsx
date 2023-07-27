@@ -304,7 +304,7 @@ function Members (props){
     const ContentDiv = (props) =>{
 
         if(contentType === "list"){
-            return (<MembersList updateCharacterDataInTable = {updateCharacterDataInTable} setMembers = {setMembers} setSearchValue = {setSearchValue} searchValue = {searchValue}  setLoading = {setLoading}  members = {members} allMembers = {MEMBERS} language = {currentLanguage}/>)
+            return (<MembersList onSearch={onSearch} updateCharacterDataInTable = {updateCharacterDataInTable} setMembers = {setMembers} setSearchValue = {setSearchValue} searchValue = {searchValue}  setLoading = {setLoading}  members = {members} allMembers = {MEMBERS} language = {currentLanguage}/>)
         }
         if(contentType === "stars"){
             return (<Stars bosses = {bosses}/>)
