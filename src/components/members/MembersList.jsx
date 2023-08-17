@@ -259,9 +259,9 @@ const MembersList = (props) =>{
                               actions={[<SyncOutlined onClick = {()=>updateCharacterData(member.id)} style={{color:'#1a854f', fontSize:'200%'}}/>]}
                             >
                             <Space  >
-                              <Link className="logo" onClick={()=>{goTo(urlWOW)}} ><img style={{maxWidth:'100%', height:'auto'}} src={wowLogo} /></Link>
-                              <Link className="logo" onClick={()=>{goTo(urlWOWLogs)}} ><img style={{maxWidth:'100%', height:'auto'}} src={wowLogsLogo} /></Link>
-                              <Link className="logo" onClick={()=>{goTo(urlRaiderIo)}} ><img style={{maxWidth:'100%', height:'auto'}} src={RaiderIo} /></Link>
+                                <a className="logo" target="_blank" href={urlWOW} ><img style={{maxWidth:'100%', height:'auto'}} src={wowLogo} /></a>
+                                <a className="logo" target="_blank" href={urlWOWLogs}><img style={{maxWidth:'100%', height:'auto'}} src={wowLogsLogo} /></a>
+                                <a className="logo" target="_blank" href={urlRaiderIo}><img style={{maxWidth:'100%', height:'auto'}} src={RaiderIo} /></a>
                             </Space>
                             </Card>
                           </Col>
